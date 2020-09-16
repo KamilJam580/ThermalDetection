@@ -64,7 +64,6 @@ namespace ThermalOperations
             Trace.WriteLine("HResult " + ex.HResult);
             Trace.WriteLine("Stack: " + ex.StackTrace);
             Trace.WriteLine("");
-            Trace.WriteLine("");
         }
 
 
