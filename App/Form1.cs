@@ -15,7 +15,7 @@ namespace App
     public partial class Form1 : Form
     {
         ThermalFile thermalFile;
-        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.txt";
+        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
         public Form1()
         {
             InitializeComponent();

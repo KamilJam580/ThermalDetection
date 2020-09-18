@@ -69,15 +69,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="FileHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FileExplorerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ThermalOperations\Core.csproj">
-      <Project>{7bc00570-ff32-4cdf-97ba-8fdd1d15b0ea}</Project>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{17d18707-e6da-42f3-b137-32f3310b6cef}</Project>
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>

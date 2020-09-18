@@ -7,10 +7,10 @@ using ThermalOperations;
 namespace ThermalOperationsTests
 {
     [TestClass]
-    public class UnitTest1
+    public class FileHandlerTest
     {
         int quantity = 10;
-        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.txt";
+        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
         int equalsCount = 0;
         int badComprared = 0;
 
@@ -77,7 +77,7 @@ namespace ThermalOperationsTests
                 thermalFiles.Add(thermalFile);
             }
             ThermalFile brokenThermalFile = DeclareBadThermalFile(thermalFiles[0]);
-            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.txt";
+            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.tof";
             thermalFiles.Add(brokenThermalFile);
 
             equalsCount = CalculateEqualsItems(thermalFiles);
@@ -97,7 +97,7 @@ namespace ThermalOperationsTests
                 thermalFiles.Add(thermalFile);
             }
             ThermalFile brokenThermalFile = DeclareBadThermalFile(thermalFiles[0]);
-            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.txt";
+            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.tof";
             thermalFiles.Add(brokenThermalFile);
 
             foreach (var thermal in thermalFiles)
@@ -163,7 +163,7 @@ namespace ThermalOperationsTests
             // Act
             ThermalFile file = ThermalFile.Read(path);
 
-            string path2 = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp225.txt";
+            string path2 = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp225.tof";
             File.Delete(path2);
             ThermalFile.Write(path2, file);
             ThermalFile file2 = ThermalFile.Read(path2);
