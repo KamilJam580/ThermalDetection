@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,24 @@ namespace App
 {
     public partial class Form1 : Form
     {
+        ThermalFile thermalFile;
+        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.txt";
         public Form1()
         {
             InitializeComponent();
-            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.txt";
-            ThermalFile thermalFile = ThermalFile.Read(path);
+            loadThermalFile();
+        }
+        private void loadThermalFile()
+        {
+            thermalFile = ThermalFile.Read(path);
             imageBox1.Image = thermalFile.images[0];
-            InitializeComponent();
+            trackBar1.Maximum = thermalFile.count-1;
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            Trace.WriteLine("val: " + trackBar1.Value);
+            imageBox1.Image = thermalFile.images[trackBar1.Value];
         }
     }
 }
