@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileHandlerTest.cs" />
+    <Compile Include="MockReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileExplorerTest.cs" />
   </ItemGroup>

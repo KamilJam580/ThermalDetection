@@ -18,6 +18,7 @@ namespace ThermalOperations
                 thermalFile = new ThermalFile();
                 thermalFile.path = filePath;
                 Trace.WriteLine("File: " + thermalFile.path);
+
                 thermalFile.raw = ReadAllLines();
                 thermalFile.temperatureData = DataConverting.RawDataToArray(thermalFile.raw);
                 thermalFile = DataConverting.CreateThermalImages(thermalFile);
@@ -32,7 +33,10 @@ namespace ThermalOperations
 
          List<string> ReadAllLines()
         {
-            return File.ReadLines(@thermalFile.path).ToList<string>();
+            List<string> allData = File.ReadLines(@thermalFile.path).ToList<string>();
+            thermalFile.width = int.Parse(allData[0]);
+            thermalFile.height = int.Parse(allData[1]);
+            return allData.GetRange(2,allData.Count-2);
         }
         
     }

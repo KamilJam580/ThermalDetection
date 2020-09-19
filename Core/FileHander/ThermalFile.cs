@@ -15,12 +15,11 @@ namespace ThermalOperations
         public List<Emgu.CV.UMat> images;
         public int count;
         public static IReader reader = new Reader();
-        int height;
-        int width;
+        public int height;
+        public int width;
         public static ThermalFile Read(string filePath)
         {
             ThermalFile thermalFile;
-            
             thermalFile = reader.Read(filePath);
             return thermalFile;
         }

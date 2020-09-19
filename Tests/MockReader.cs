@@ -30,7 +30,7 @@ namespace Core.FileHander
                 {
                     for (int y = 0; y < 160; y++)
                     {
-                        stringBuilder.Append("5 ");
+                        stringBuilder.Append(i.ToString()+ " ");
                     }
                 }
 
