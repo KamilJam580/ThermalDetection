@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.FileHander;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -7,14 +8,15 @@ using System.Threading.Tasks;
 
 namespace ThermalOperations
 {
-    public static class Reader
+    public class Reader : IReader
     {
-        static ThermalFile thermalFile;
-        public static ThermalFile Read(string filePath)
+        ThermalFile thermalFile;
+        public ThermalFile Read(string filePath)
         {
             if (File.Exists(filePath))
             {
-                thermalFile = new ThermalFile(filePath);
+                thermalFile = new ThermalFile();
+                thermalFile.path = filePath;
                 Trace.WriteLine("File: " + thermalFile.path);
                 thermalFile.raw = ReadAllLines();
                 thermalFile.temperatureData = DataConverting.RawDataToArray(thermalFile.raw);
@@ -28,7 +30,7 @@ namespace ThermalOperations
             }     
         }
 
-        static List<string> ReadAllLines()
+         List<string> ReadAllLines()
         {
             return File.ReadLines(@thermalFile.path).ToList<string>();
         }

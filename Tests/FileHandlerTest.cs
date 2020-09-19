@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using Core.FileHander;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ThermalOperations;
 namespace ThermalOperationsTests
@@ -19,6 +20,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             // Act
+            ThermalFile.reader = new MockReader();
             ThermalFile thermalFile  = ThermalFile.Read(path);
             // Assert
             int imagesCount = thermalFile.images.Count;
@@ -131,7 +133,7 @@ namespace ThermalOperationsTests
 
         private ThermalFile DeclareBadThermalFile(ThermalFile thermalFile)
         {
-            ThermalFile badThermalFile = new ThermalFile(path);
+            ThermalFile badThermalFile = new ThermalFile();
             badThermalFile.count = thermalFile.count;
             badThermalFile.minTemperature = thermalFile.minTemperature;
             badThermalFile.maxTemperature = thermalFile.maxTemperature;

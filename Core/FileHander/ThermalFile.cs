@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.FileHander;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,14 +14,14 @@ namespace ThermalOperations
         public List<int[,]> temperatureData;
         public List<Emgu.CV.UMat> images;
         public int count;
-        public ThermalFile(string path)
-        {
-            this.path = path;
-        }
+        public static IReader reader = new Reader();
+        int height;
+        int width;
         public static ThermalFile Read(string filePath)
         {
             ThermalFile thermalFile;
-            thermalFile = Reader.Read(filePath);
+            
+            thermalFile = reader.Read(filePath);
             return thermalFile;
         }
         public static void Write(string path, ThermalFile file)

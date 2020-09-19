@@ -8,6 +8,7 @@ namespace Core.FileExplorer
     public static class FileExplorer
     {
         private static string thermoExtension = "*.tof";
+        private static string currentDir;
         public static string[] getFiles(string path)
         {
             if (Directory.Exists(path))
@@ -47,6 +48,7 @@ namespace Core.FileExplorer
         public static string[] getDirs(string path)
         {
             string[] dirs = Directory.GetDirectories(path);
+            
             return dirs;
         }
 
