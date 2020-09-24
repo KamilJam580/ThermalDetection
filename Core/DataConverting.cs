@@ -9,9 +9,12 @@ namespace ThermalOperations
 {
     public static class DataConverting
     {
-        public static List<int[,]> RawDataToArray(List<string> raw)
+        private static readonly log4net.ILog log = 
+            log4net.LogManager.GetLogger(
+                System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        public static List<int[,]> RawDataToArray(List<string> raw, int height, int width)
         {
-            Trace.WriteLine(raw.Count);
+            log.Info("Images in file: " + raw.Count);
             List<int[,]> temperatureData = DeclareTemperatureData(raw.Count);
             bool exception = false;
             Parallel.For(0, raw.Count, (i, loopstate) =>
@@ -75,9 +78,12 @@ namespace ThermalOperations
             {
                 Emgu.CV.CvInvoke.UseOpenCL = false;
                 List<Emgu.CV.UMat> ThermalImage = declareThermalImage(thermalFile);
-                List<Emgu.CV.Matrix<int>> intMatrices = ScaleIntensity(thermalFile);
-                double minTemperature = thermalFile.minTemperature;
-                double maxTemperature = thermalFile.maxTemperature;
+                double minTemperature;
+                double maxTemperature;
+                List<Emgu.CV.Matrix<int>> intMatrices = ScaleIntensity2(thermalFile.temperatureData, out minTemperature, out maxTemperature);
+                //List<Emgu.CV.Matrix<int>> intMatrices = ScaleIntensity(thermalFile);
+                //double minTemperature = thermalFile.minTemperature;
+                //double maxTemperature = thermalFile.maxTemperature;
                 Parallel.For(0, thermalFile.count, i =>
                 {
                     Emgu.CV.UMat ColorImg = new Emgu.CV.UMat();
@@ -106,20 +112,21 @@ namespace ThermalOperations
             }
             return ThermalImages;
         }
-        static private List<Emgu.CV.Matrix<int>> ScaleIntensity(ThermalFile thermalFile)
+
+        static private List<Emgu.CV.Matrix<int>> ScaleIntensity2(List<int[,]> temperatureDatas, out double min, out double max)
         {
             List<Emgu.CV.Matrix<int>> intMatrices = new List<Emgu.CV.Matrix<int>>();
             List<double> minTemps = new List<double>();
             List<double> maxTemps = new List<double>();
-            for (int i = 0; i < thermalFile.count; i++)
+            for (int i = 0; i < temperatureDatas.Count; i++)
             {
                 intMatrices.Add(new Emgu.CV.Matrix<int>(new System.Drawing.Size(160, 120)));
                 minTemps.Add(new double());
                 maxTemps.Add(new double());
             }
-            Parallel.For(0, thermalFile.count, i =>
+            Parallel.For(0, temperatureDatas.Count, i =>
             {
-                intMatrices[i] = new Emgu.CV.Matrix<int>(thermalFile.temperatureData[i]);
+                intMatrices[i] = new Emgu.CV.Matrix<int>(temperatureDatas[i]);
                 double minT;
                 double maxT;
                 System.Drawing.Point minTPoint;
@@ -130,14 +137,12 @@ namespace ThermalOperations
 
             });
 
-            double minTemp = ((from l in minTemps select l).Min());
-            double maxTemp = ((from l in maxTemps select l).Max());
+            min = ((from l in minTemps select l).Min());
+            max = ((from l in maxTemps select l).Max());
 
-            maxTemp = maxTemp - ((maxTemp - minTemp) * 0.75);
-            Trace.WriteLine("min: " + minTemp);
-            Trace.WriteLine("max: " + maxTemp);
-            thermalFile.minTemperature = minTemp;
-            thermalFile.maxTemperature = maxTemp;
+            max = max - ((max - min) * 0.75);
+            Trace.WriteLine("min: " + min);
+            Trace.WriteLine("max: " + max);
             return intMatrices;
         }
     }

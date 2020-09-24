@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="Emgu.CV" Version="4.4.0.4061" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.4.0.4061" />
+    <PackageReference Include="log4net" Version="2.0.10" />
   </ItemGroup>
 
 </Project>

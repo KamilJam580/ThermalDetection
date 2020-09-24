@@ -28,6 +28,7 @@ namespace ThermalOperations
             Writer.Write(path, file);
         }
 
+
         public static bool operator == (ThermalFile file1, ThermalFile file2)
         {
             if (file1.count != file2.count)

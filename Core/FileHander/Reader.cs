@@ -20,7 +20,7 @@ namespace ThermalOperations
                 Trace.WriteLine("File: " + thermalFile.path);
 
                 thermalFile.raw = ReadAllLines();
-                thermalFile.temperatureData = DataConverting.RawDataToArray(thermalFile.raw);
+                thermalFile.temperatureData = DataConverting.RawDataToArray(thermalFile.raw, thermalFile.height, thermalFile.width);
                 thermalFile = DataConverting.CreateThermalImages(thermalFile);
                 return thermalFile;
             }
