@@ -26,6 +26,12 @@ namespace App
             thermalFile = ThermalFile.Read(path);
             imageBox1.Image = thermalFile.images[0];
             trackBar1.Maximum = thermalFile.count-1;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Images: " + thermalFile.count);
+            Console.WriteLine("min: " + thermalFile.minTemperature);
         }
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)

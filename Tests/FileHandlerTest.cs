@@ -143,7 +143,7 @@ namespace ThermalOperationsTests
             badThermalFile.minTemperature = thermalFile.minTemperature;
             badThermalFile.maxTemperature = thermalFile.maxTemperature;
             badThermalFile.images = new List<Emgu.CV.UMat>(thermalFile.images);
-            badThermalFile.temperatureData = new List<int[,]>(thermalFile.temperatureData);
+            badThermalFile.TemperatureData = new List<int[,]>(thermalFile.TemperatureData);
             return badThermalFile;
         }
 

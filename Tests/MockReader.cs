@@ -16,8 +16,9 @@ namespace Core.FileHander
             thermalFile.count = 10;
             thermalFile.raw = MakeRawData();
 
-            thermalFile.temperatureData = DataConverting.RawDataToArray(thermalFile.raw, 120, 160);
-            thermalFile = DataConverting.CreateThermalImages(thermalFile);
+            thermalFile.TemperatureData = DataConverting.RawDataToArray(thermalFile.raw, 120, 160);
+            thermalFile.images = DataConverting.CreateThermalImages(thermalFile.intMatrices,thermalFile.minTemperature, thermalFile.maxTemperature);
+            thermalFile.count = thermalFile.images.Count;
             return thermalFile;
         }
         private List<string> MakeRawData()

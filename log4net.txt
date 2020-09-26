@@ -406,3 +406,214 @@ val: 12
 val: 14
 val: 15
 val: 16
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+min: 122
+max: 193,75
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+min: 122
+max: 193,75
+val: 1
+val: 2
+val: 3
+val: 4
+val: 6
+val: 9
+val: 11
+val: 15
+val: 18
+val: 20
+val: 23
+val: 27
+val: 30
+val: 34
+val: 36
+val: 39
+val: 41
+val: 43
+val: 44
+val: 45
+val: 46
+val: 47
+val: 48
+val: 49
+val: 50
+val: 51
+val: 52
+val: 53
+val: 54
+val: 55
+val: 56
+val: 57
+val: 58
+val: 59
+val: 61
+val: 63
+val: 65
+val: 67
+val: 69
+val: 72
+val: 74
+val: 77
+val: 78
+val: 79
+val: 78
+val: 76
+val: 73
+val: 72
+val: 68
+val: 63
+val: 59
+val: 54
+val: 49
+val: 45
+val: 42
+val: 39
+val: 35
+val: 33
+val: 32
+val: 31
+val: 30
+val: 29
+val: 28
+val: 27
+val: 26
+val: 24
+val: 23
+val: 22
+val: 21
+val: 20
+val: 19
+val: 17
+val: 16
+val: 14
+val: 12
+val: 10
+val: 9
+val: 8
+val: 7
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+min: 122
+max: 193,75
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+min: 122
+max: 193,75
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+min: 122
+max: 193,75
+val: 1
+val: 2
+val: 3
+val: 4
+val: 5
+val: 6
+val: 7
+val: 9
+val: 11
+val: 12
+val: 14
+val: 15
+val: 17
+val: 19
+val: 20
+val: 22
+val: 24
+val: 26
+val: 27
+val: 28
+val: 29
+val: 30
+val: 31
+val: 32
+val: 33
+val: 34
+val: 35
+val: 36
+val: 37
+val: 38
+val: 39
+val: 40
+val: 42
+val: 44
+val: 45
+val: 47
+val: 48
+val: 49
+val: 51
+val: 52
+val: 54
+val: 55
+val: 56
+val: 57
+val: 58
+val: 59
+val: 60
+val: 61
+val: 62
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+File: D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof
+log4net: log4net assembly [log4net, Version=2.0.9.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a]. Loaded from [D:\ThermalDetection\ThermalDetection\App\bin\Debug\log4net.dll]. (.NET Runtime [4.0.30319.42000] on Microsoft Windows NT 6.2.9200.0)
+log4net: defaultRepositoryType [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository for assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] Loaded From [D:\ThermalDetection\ThermalDetection\App\bin\Debug\Core.dll]
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] does not have a RepositoryAttribute specified.
+log4net: Assembly [Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null] using repository [log4net-default-repository] and repository type [log4net.Repository.Hierarchy.Hierarchy]
+log4net: Creating repository [log4net-default-repository] using type [log4net.Repository.Hierarchy.Hierarchy]
+val: 5
+val: 10
+val: 15
+val: 20
+val: 25
+val: 30
+val: 35
+val: 40
+val: 45

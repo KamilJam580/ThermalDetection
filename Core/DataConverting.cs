@@ -69,51 +69,42 @@ namespace ThermalOperations
             Trace.WriteLine("");
         }
 
-
-        static public ThermalFile CreateThermalImages(ThermalFile thermalFile)
+        static public List<Emgu.CV.UMat> CreateThermalImages(List<Emgu.CV.Matrix<int>> intMatrices,double min,double max)
         {
-            thermalFile.count = thermalFile.temperatureData.Count;
             System.Drawing.Rectangle rect = new System.Drawing.Rectangle(0, 0, 160, 120);
-            if (thermalFile.temperatureData != null)
+            if (intMatrices != null)
             {
                 Emgu.CV.CvInvoke.UseOpenCL = false;
-                List<Emgu.CV.UMat> ThermalImage = declareThermalImage(thermalFile);
-                double minTemperature;
-                double maxTemperature;
-                List<Emgu.CV.Matrix<int>> intMatrices = ScaleIntensity2(thermalFile.temperatureData, out minTemperature, out maxTemperature);
-                //List<Emgu.CV.Matrix<int>> intMatrices = ScaleIntensity(thermalFile);
-                //double minTemperature = thermalFile.minTemperature;
-                //double maxTemperature = thermalFile.maxTemperature;
-                Parallel.For(0, thermalFile.count, i =>
+                List<Emgu.CV.UMat> ThermalImage = declareThermalImage(intMatrices.Count);
+
+
+                Parallel.For(0, intMatrices.Count, i =>
                 {
                     Emgu.CV.UMat ColorImg = new Emgu.CV.UMat();
                     Emgu.CV.UMat UMatFloatImg;
                     Emgu.CV.UMat UMatFloatImg2 = new Emgu.CV.UMat();
 
-                    intMatrices[i] = (intMatrices[i] - minTemperature);
+                    intMatrices[i] = (intMatrices[i] - min);
                     UMatFloatImg = new Emgu.CV.UMat(intMatrices[i].ToUMat(), rect);
-                    UMatFloatImg.ConvertTo(UMatFloatImg, Emgu.CV.CvEnum.DepthType.Cv8U, (1 / maxTemperature) * 255);
+                    UMatFloatImg.ConvertTo(UMatFloatImg, Emgu.CV.CvEnum.DepthType.Cv8U, (1 / max) * 255);
                     Emgu.CV.CvInvoke.ApplyColorMap(UMatFloatImg, UMatFloatImg2, Emgu.CV.CvEnum.ColorMapType.Hot);
                     ThermalImage[i] = UMatFloatImg2.Clone();
                 });
-                thermalFile.images = ThermalImage;
-                return thermalFile;
+                return ThermalImage;
             }
             return null;
         }
-
-        static private List<Emgu.CV.UMat> declareThermalImage(ThermalFile thermalFile)
+        static private List<Emgu.CV.UMat> declareThermalImage(int Count)
         {
-            Trace.WriteLine("Images: " + thermalFile.count);
             List<Emgu.CV.UMat> ThermalImages = new List<Emgu.CV.UMat>();
-            for (int i = 0; i < thermalFile.count; i++)
+            for (int i = 0; i < Count; i++)
             {
                 ThermalImages.Add(new Emgu.CV.UMat());
             }
             return ThermalImages;
         }
-
-        static private List<Emgu.CV.Matrix<int>> ScaleIntensity2(List<int[,]> temperatureDatas, out double min, out double max)
+        
+        static public List<Emgu.CV.Matrix<int>> ScaleIntensity(List<int[,]> temperatureDatas, out double min, out double max)
         {
             List<Emgu.CV.Matrix<int>> intMatrices = new List<Emgu.CV.Matrix<int>>();
             List<double> minTemps = new List<double>();
@@ -136,14 +127,11 @@ namespace ThermalOperations
                 maxTemps[i] = maxT;
 
             });
-
             min = ((from l in minTemps select l).Min());
             max = ((from l in maxTemps select l).Max());
-
             max = max - ((max - min) * 0.75);
-            Trace.WriteLine("min: " + min);
-            Trace.WriteLine("max: " + max);
             return intMatrices;
         }
+
     }
 }

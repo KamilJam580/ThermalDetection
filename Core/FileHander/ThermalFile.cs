@@ -1,7 +1,9 @@
 ﻿using Core.FileHander;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ThermalOperations
 {
@@ -11,12 +13,24 @@ namespace ThermalOperations
         public double maxTemperature;
         public string path;
         public List<string> raw;
-        public List<int[,]> temperatureData;
         public List<Emgu.CV.UMat> images;
         public int count;
         public static IReader reader = new Reader();
         public int height;
         public int width;
+        public List<Emgu.CV.Matrix<int>> intMatrices;
+        private List<int[,]> temperatureData;
+
+        public List<int[,]> TemperatureData
+        {
+            get { return temperatureData; }
+            set 
+            {
+                temperatureData = value;
+                intMatrices = DataConverting.ScaleIntensity(temperatureData, out minTemperature, out maxTemperature);
+            }
+        }
+
         public static ThermalFile Read(string filePath)
         {
             ThermalFile thermalFile;
@@ -27,7 +41,6 @@ namespace ThermalOperations
         {
             Writer.Write(path, file);
         }
-
 
         public static bool operator == (ThermalFile file1, ThermalFile file2)
         {
