@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.FileExplorer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,9 @@ namespace App
         {
             InitializeComponent();
             loadThermalFile();
+
+            FileExplorer fileExplorer = new FileExplorer();
+
         }
         private void loadThermalFile()
         {
