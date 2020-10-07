@@ -1,5 +1,5 @@
 ﻿using Core.FileHander;
-using FilexExplorer;
+using CoreLib.FileHander;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

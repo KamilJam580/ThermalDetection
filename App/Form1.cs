@@ -1,4 +1,4 @@
-﻿using Core.FileExplorer;
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using GuiElements;
+using FilexExplorer;
 using ThermalOperations;
+using CoreLib.FileHander;
 
 namespace App
 {
@@ -17,13 +21,25 @@ namespace App
     {
         ThermalFile thermalFile;
         string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
+        Explorer filexExplorer;
+        StringFormat drawFormat = new StringFormat();
+        ItemPanel guiElements = new ItemPanel();
         public Form1()
         {
             InitializeComponent();
             loadThermalFile();
 
-            FileExplorer fileExplorer = new FileExplorer();
+            drawFormat.FormatFlags = StringFormatFlags.LineLimit;
 
+            filexExplorer = new Explorer();
+            filexExplorer.CurrentPath = @"D:\Dysk USB\2017";
+
+            guiElements.setFolderClickDelegate(FolderItemClicked);
+            guiElements.setFileClickDelegate(FileItemClicked);
+
+            CreateUpperDirButton();
+            DrawTable();
         }
         private void loadThermalFile()
         {
@@ -42,6 +58,48 @@ namespace App
         {
             Trace.WriteLine("val: " + trackBar1.Value);
             imageBox1.Image = thermalFile.images[trackBar1.Value];
+        }
+        private void DrawTable()
+        {
+            tableLayoutPanel1.Controls.Clear();
+            FlowLayoutPanel titlePanel = AddressBar.CreateTitleBar(filexExplorer.CurrentPath);
+
+            List<string> dirs = filexExplorer.getDirs();
+            List<IFile> files = filexExplorer.getFiles();
+            List<IFile> thermofiles = filexExplorer.getThermoFiles();
+            files.AddRange(thermofiles);
+
+            FlowLayoutPanel flowLayoutPanel = guiElements.CreatePanelWithItems(dirs, files);
+
+            tableLayoutPanel1.Controls.Add(titlePanel, 0, 0);
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel, 0, 1);
+
+            ConfigureTablePanel();
+        }
+        private void CreateUpperDirButton()
+        {
+            button1.Text = char.ConvertFromUtf32(0x2191);
+            button1.Click += (sender, EventArgs) =>
+            {
+                filexExplorer.gotoUpperDir();
+                DrawTable();
+            };
+        }
+        void FolderItemClicked(object sender, EventArgs e, string name)
+        {
+            filexExplorer.gotoDir(name);
+            DrawTable();
+        }
+        private void FileItemClicked(object sender, EventArgs e, IFile file)
+        {
+            Console.WriteLine("event: " + file.getName());
+        }
+        private void ConfigureTablePanel()
+        {
+            tableLayoutPanel1.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
+            tableLayoutPanel1.RowStyles[0].Height = 5;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.AutoScroll = true;
         }
     }
 }

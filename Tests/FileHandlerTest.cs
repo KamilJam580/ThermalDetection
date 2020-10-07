@@ -5,6 +5,7 @@ using System.IO;
 using Core.FileHander;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ThermalOperations;
+
 namespace ThermalOperationsTests
 {
     [TestClass]

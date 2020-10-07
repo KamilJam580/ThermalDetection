@@ -142,9 +142,17 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{17d18707-e6da-42f3-b137-32f3310b6cef}</Project>
-      <Name>Core</Name>
+    <ProjectReference Include="..\CoreLib\CoreLib.csproj">
+      <Project>{F9284064-160E-4FD7-A656-58B988AB2F59}</Project>
+      <Name>CoreLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FilexExplorer\FilexExplorer.csproj">
+      <Project>{b068b2c6-ed25-480c-9dbe-61624d9f35bf}</Project>
+      <Name>FilexExplorer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GuiElements\GuiElements.csproj">
+      <Project>{c393818a-13b1-47bc-ab83-35803bae6566}</Project>
+      <Name>GuiElements</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
