@@ -61,7 +61,7 @@ namespace App
         }
         private void DrawTable()
         {
-            tableLayoutPanel1.Controls.Clear();
+            tableLayoutPanel1.Controls.Clear() ;
             FlowLayoutPanel titlePanel = AddressBar.CreateTitleBar(filexExplorer.CurrentPath);
 
             List<string> dirs = filexExplorer.getDirs();
