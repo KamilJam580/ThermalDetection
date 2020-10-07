@@ -33,6 +33,7 @@ namespace Core.FileExplorer
             }
         }
 
+
         public string gotoUpperDir()
         {
             if (Directory.Exists(currentPath))
@@ -45,6 +46,12 @@ namespace Core.FileExplorer
             {
                 throw new Exception();
             }
+        }
+
+        public string gotoDir(string dir)
+        {
+
+            return "";
         }
 
         private List<string> getFiles()
@@ -80,7 +87,6 @@ namespace Core.FileExplorer
             dirs = new List<string>(dirs2);
             return dirs;
         }
-
 
 
     }
