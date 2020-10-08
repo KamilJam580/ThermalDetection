@@ -37,34 +37,25 @@ namespace GuiElements
             return flowLayoutPanel;
         }
 
-        public Action<object, EventArgs, string> FolderClickDel;
-        public Action<object, EventArgs, IFile> FileClickDel;
-        public void setFolderClickDelegate(Action<object, EventArgs, string> folderItemClicked)
+        public Action<object, EventArgs, string> FolderClickCallback;
+        public Action<object, EventArgs, IFile> FoleClickCallback;
+        public void setFolderClickDelegate(Action<object, EventArgs, string> folderClickCallback)
         {
-            FolderClickDel = folderItemClicked;
+            FolderClickCallback = folderClickCallback;
         }
-        void FolderItemClicked(object sender, EventArgs e, string name)
+        public void setFileClickDelegate(Action<object, EventArgs, IFile> fileClickCallback)
         {
-            FolderClickDel.Invoke(sender, e, name);
+            FoleClickCallback  = fileClickCallback;
         }
-        public void setFileClickDelegate(Action<object, EventArgs, IFile> fileItemClicked)
-        {
-            FileClickDel = fileItemClicked;
-        }
-        void FileItemClicked(object sender, EventArgs e, IFile file)
-        {
-            FileClickDel.Invoke(sender, e, file);
-        }
-
         public List<Panel> getFoldersPanels(List<string> dirs)
         {
             List<Panel> panels = new List<Panel>();
-            foreach (var item in dirs)
+            foreach (var name in dirs)
             {
-                Panel drawPanel = DrawPanel(item, folderImageI);
+                Panel drawPanel = DrawPanel(name, folderImageI);
                 drawPanel.Click += (sender, EventArgs) =>
                 {
-                    FolderItemClicked(sender, EventArgs, item);
+                    FolderClickCallback.Invoke(sender, EventArgs, name);
                 };
                 ResizeAndSetPadding(drawPanel);
                 panels.Add(drawPanel);
@@ -75,15 +66,15 @@ namespace GuiElements
         private List<Panel> getFilesPanels(List<IFile> files)
         {
             List<Panel> panels = new List<Panel>();
-            foreach (var item in files)
+            foreach (var file in files)
             {
-                Image itemImage = item.getThumbnail();
+                Image itemImage = file.getThumbnail();
                 Bitmap itemBitmap = new Bitmap(itemImage, 60, 60);
 
-                Panel drawPanel = DrawPanel(item.getName(), itemBitmap);
+                Panel drawPanel = DrawPanel(file.getName(), itemBitmap);
                 drawPanel.Click += (sender, EventArgs) =>
                 {
-                    FileItemClicked(sender, EventArgs, item);
+                    FoleClickCallback.Invoke(sender, EventArgs, file);
                 };
                 ResizeAndSetPadding(drawPanel);
                 panels.Add(drawPanel);

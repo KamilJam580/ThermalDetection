@@ -87,7 +87,7 @@ namespace ThermalOperations
                         Emgu.CV.UMat UMatFloatImg2 = new Emgu.CV.UMat();
 
                         intMatrices[i] = (intMatrices[i] - min);
-                        UMatFloatImg = new Emgu.CV.UMat(intMatrices[i].ToUMat(), rect);
+                        UMatFloatImg = new Emgu.CV.UMat(intMatrices[i].Clone().ToUMat(), rect);
                         UMatFloatImg.ConvertTo(UMatFloatImg, Emgu.CV.CvEnum.DepthType.Cv8U, (1 / max) * 255);
                         Emgu.CV.CvInvoke.ApplyColorMap(UMatFloatImg, UMatFloatImg2, Emgu.CV.CvEnum.ColorMapType.Hot);
                         ThermalImage[i] = UMatFloatImg2.Clone();
