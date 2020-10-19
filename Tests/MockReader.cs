@@ -6,7 +6,7 @@ using ThermalOperations;
 
 namespace Core.FileHander
 {
-    public class MockReader : IReader
+    public class MockReader : IThermalReader
     {
         ThermalFile thermalFile;
         public ThermalFile Read(string filePath)

@@ -3,6 +3,7 @@ using CoreLib.FileHander;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,11 +18,22 @@ namespace ThermalOperations
         public List<string> raw;
         public List<Emgu.CV.UMat> images;
         public int count;
-        public static IReader reader = new Reader();
+        public static IThermalReader thermalreader = new ThermalReader();
         public int height;
         public int width;
         public List<Emgu.CV.Matrix<int>> intMatrices;
         private List<int[,]> temperatureData;
+
+        public static ThermalFile Read(string filePath)
+        {
+            ThermalFile thermalFile;
+            thermalFile = thermalreader.Read(filePath);
+            return thermalFile;
+        }
+        public static void Write(string path, ThermalFile file)
+        {
+            ThermalWriter.Write(path, file);
+        }
 
         public List<int[,]> TemperatureData
         {
@@ -33,7 +45,6 @@ namespace ThermalOperations
             }
         }
 
-
         public string Path
         {
             get
@@ -42,19 +53,11 @@ namespace ThermalOperations
             }
             set
             {
-                path = value;
+                if (Directory.Exists(value))
+                    path = value;
+                else
+                    throw new Exception();
             }
-        }
-
-        public static ThermalFile Read(string filePath)
-        {
-            ThermalFile thermalFile;
-            thermalFile = reader.Read(filePath);
-            return thermalFile;
-        }
-        public static void Write(string path, ThermalFile file)
-        {
-            Writer.Write(path, file);
         }
 
         public Image getThumbnail()
@@ -62,7 +65,6 @@ namespace ThermalOperations
             Icon icon = Icon.ExtractAssociatedIcon(path);
             return icon.ToBitmap();
         }
-
         public string getName()
         {
             return System.IO.Path.GetFileName(Path);

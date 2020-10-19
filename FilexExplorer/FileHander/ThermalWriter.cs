@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ThermalOperations
 {
-    public static class Writer
+    public static class ThermalWriter
     {
         public static void Write(string path, ThermalFile file)
         {

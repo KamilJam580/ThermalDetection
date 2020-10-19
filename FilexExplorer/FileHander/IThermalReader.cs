@@ -5,7 +5,7 @@ using ThermalOperations;
 
 namespace Core.FileHander
 {
-     public interface IReader
+     public interface IThermalReader
      {
         ThermalFile Read(string filePath);
     }

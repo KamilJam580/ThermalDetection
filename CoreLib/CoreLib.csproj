@@ -56,11 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataConverting.cs" />
-    <Compile Include="FileHander\IFile.cs" />
-    <Compile Include="FileHander\IReader.cs" />
-    <Compile Include="FileHander\Reader.cs" />
-    <Compile Include="FileHander\ThermalFile.cs" />
-    <Compile Include="FileHander\Writer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

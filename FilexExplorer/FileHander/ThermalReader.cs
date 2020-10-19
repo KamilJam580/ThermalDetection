@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ThermalOperations
 {
-    public class Reader : IReader
+    public class ThermalReader : IThermalReader
     {
         ThermalFile thermalFile;
         public ThermalFile Read(string filePath)

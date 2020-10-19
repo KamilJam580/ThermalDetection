@@ -21,7 +21,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             // Act
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             ThermalFile thermalFile  = ThermalFile.Read(path);
             // Assert
             int imagesCount = thermalFile.images.Count;
@@ -32,7 +32,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             ThermalFile thermalFile;
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             int imagecount = 0;
             // Act
             for (int i = 0; i < quantity; i++)
@@ -49,7 +49,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             // Act
             for (int i = 0; i < quantity; i++)
             {
@@ -75,7 +75,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             // Act
             for (int i = 0; i < quantity; i++)
             {
@@ -96,7 +96,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             // Act
             for (int i = 0; i < quantity; i++)
             {
@@ -120,7 +120,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             // Act
             for (int i = 0; i < quantity; i++)
             {
@@ -168,7 +168,7 @@ namespace ThermalOperationsTests
         {
             // Arrage
             List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.reader = new MockReader();
+            ThermalFile.thermalreader = new MockReader();
             // Act
             ThermalFile file = ThermalFile.Read(path);
 

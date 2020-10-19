@@ -35,8 +35,8 @@ namespace App
             filexExplorer = new Explorer();
             filexExplorer.CurrentPath = @"D:\Dysk USB\2017";
 
-            guiElements.setFolderClickDelegate(FolderItemClicked);
-            guiElements.setFileClickDelegate(FileItemClicked);
+            guiElements.SetFolderClickDelegate(FolderItemClicked);
+            guiElements.SetFileClickDelegate(FileItemClicked);
 
             CreateUpperDirButton();
             DrawTable();
