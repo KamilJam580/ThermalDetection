@@ -11,132 +11,38 @@ namespace ThermalOperationsTests
     [TestClass]
     public class FileHandlerTest
     {
-        int quantity = 10;
-        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
-        int equalsCount = 0;
-        int badComprared = 0;
-
         [TestMethod]
         public void ReadThermalFile()
         {
             // Arrage
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
             // Act
-            ThermalFile.thermalreader = new MockReader();
-            ThermalFile thermalFile  = ThermalFile.Read(path);
+            IThermalReader thermalFileReader = new MockReader();
+            ThermalFile thermalFile = thermalFileReader.Read(path);
             // Assert
             int imagesCount = thermalFile.images.Count;
             Assert.AreNotEqual(0, imagesCount);
         }
         [TestMethod]
-        public void ReadThermalFileALootAndCheckQuantityInFile()
+        public void CheckImagesCountInFile()
         {
             // Arrage
-            ThermalFile thermalFile;
-            ThermalFile.thermalreader = new MockReader();
+            int quantity = 10;
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
+            IThermalReader thermalFileReader = new MockReader();
             int imagecount = 0;
             // Act
             for (int i = 0; i < quantity; i++)
             {
-                thermalFile = ThermalFile.Read(path);
+                ThermalFile thermalFile = thermalFileReader.Read(path);
                 imagecount = thermalFile.images.Count;
             }
             // Assert
 
             Assert.AreNotEqual(0, imagecount);
+
         }
-        [TestMethod]
-        public void ComprareThermalFiles()
-        {
-            // Arrage
-            List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.thermalreader = new MockReader();
-            // Act
-            for (int i = 0; i < quantity; i++)
-            {
-                ThermalFile thermalFile = ThermalFile.Read(path);
-                thermalFiles.Add(thermalFile);
-            }
-            equalsCount = CalculateEqualsItems(thermalFiles);
-            // Assert
-            Assert.AreEqual(quantity, equalsCount);
-        }
-
-        private int CalculateEqualsItems(List<ThermalFile> thermalFiles)
-        {
-            foreach (var thermal in thermalFiles)
-                if (thermal == thermalFiles[0])
-                    equalsCount++;
-
-            return equalsCount;
-        }
-
-        [TestMethod]
-        public void EqualsThermalFilesWithBrokenPath()
-        {
-            // Arrage
-            List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.thermalreader = new MockReader();
-            // Act
-            for (int i = 0; i < quantity; i++)
-            {
-                ThermalFile thermalFile = ThermalFile.Read(path);
-                thermalFiles.Add(thermalFile);
-            }
-            ThermalFile brokenThermalFile = DeclareBadThermalFile(thermalFiles[0]);
-            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.tof";
-            thermalFiles.Add(brokenThermalFile);
-
-            equalsCount = CalculateEqualsItems(thermalFiles);
-            // Assert
-            Assert.AreEqual(thermalFiles.Count, equalsCount);
-        }
-
-        [TestMethod]
-        public void NotEqualsThermalFilesWithBrokenPath()
-        {
-            // Arrage
-            List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.thermalreader = new MockReader();
-            // Act
-            for (int i = 0; i < quantity; i++)
-            {
-                ThermalFile thermalFile = ThermalFile.Read(path);
-                thermalFiles.Add(thermalFile);
-            }
-            ThermalFile brokenThermalFile = DeclareBadThermalFile(thermalFiles[0]);
-            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.tof";
-            thermalFiles.Add(brokenThermalFile);
-
-            foreach (var thermal in thermalFiles)
-                if (thermal != thermalFiles[0])
-                    badComprared++;
-
-            // Assert
-            Assert.AreEqual(0, badComprared);
-        }
-
-        [TestMethod]
-        public void ComprareThermalFilesWithBrokenImage()
-        {
-            // Arrage
-            List<ThermalFile> thermalFiles = new List<ThermalFile>();
-            ThermalFile.thermalreader = new MockReader();
-            // Act
-            for (int i = 0; i < quantity; i++)
-            {
-                ThermalFile thermalFile = ThermalFile.Read(path);
-                thermalFiles.Add(thermalFile);
-            }
-            ThermalFile badFile = GenerateThermalFileWithBrokenImage(thermalFiles[0]);
-            thermalFiles.Add(badFile);
-
-            foreach (var thermal in thermalFiles)
-                if (thermal == thermalFiles[1])
-                    equalsCount++;
-            // Assert
-            Assert.AreEqual(quantity , equalsCount);
-        }
-
         private ThermalFile DeclareBadThermalFile(ThermalFile thermalFile)
         {
             ThermalFile badThermalFile = new ThermalFile();
@@ -148,7 +54,7 @@ namespace ThermalOperationsTests
             return badThermalFile;
         }
 
-        private ThermalFile GenerateThermalFileWithBrokenImage(ThermalFile file )
+        private ThermalFile GenerateThermalFileWithBrokenImage(ThermalFile file)
         {
             ThermalFile brokenThermalFile = DeclareBadThermalFile(file);
 
@@ -162,6 +68,118 @@ namespace ThermalOperationsTests
             brokenThermalFile.images = new List<Emgu.CV.UMat>(imgs);
             return brokenThermalFile;
         }
+        private int CalculateEqualsItems(List<ThermalFile> thermalFiles)
+        {
+            int equalsCount = 0;
+            foreach (var thermal in thermalFiles)
+                if (thermal == thermalFiles[0])
+                    equalsCount++;
+
+            return equalsCount;
+        }
+
+        [TestMethod]
+        public void CheckImagesCountWithWrongPath()
+        {
+            // Arrage
+            int quantity = 10;
+            int equalsCount = 0;
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
+            List<ThermalFile> thermalFiles = new List<ThermalFile>();
+            ThermalFile.thermalreader = new MockReader();
+            ThermalFile thermalFile = ThermalFile.Read(path);
+            // Act
+            for (int i = 0; i < quantity; i++)
+            {
+
+                thermalFiles.Add(thermalFile);
+            }
+            ThermalFile brokenThermalFile = DeclareBadThermalFile(thermalFiles[0]);
+            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.tof";
+            thermalFiles.Add(brokenThermalFile);
+
+            equalsCount = CalculateEqualsItems(thermalFiles);
+            // Assert
+            Assert.AreEqual(thermalFiles.Count, equalsCount);
+        }
+        [TestMethod]
+        public void ComprareThermalFiles()
+        {
+            // Arrage
+            int quantity = 10;
+            int equalsCount = 0;
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
+            List<ThermalFile> thermalFiles = new List<ThermalFile>();
+            ThermalFile.thermalreader = new MockReader();
+            ThermalFile thermalFile = ThermalFile.Read(path);
+            // Act
+            for (int i = 0; i < quantity; i++)
+            {
+
+                thermalFiles.Add(thermalFile);
+            }
+            equalsCount = CalculateEqualsItems(thermalFiles);
+            // Assert
+            Assert.AreEqual(quantity, equalsCount);
+        }
+        [TestMethod]
+        public void NotEqualsThermalFilesWithBrokenPath()
+        {
+            // Arrage
+            int quantity = 10;
+            int badComprared = 0;
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
+            List<ThermalFile> thermalFiles = new List<ThermalFile>();
+            ThermalFile.thermalreader = new MockReader();
+            ThermalFile thermalFile = ThermalFile.Read(path);
+
+            // Act
+            for (int i = 0; i < quantity; i++)
+            {
+
+                thermalFiles.Add(thermalFile);
+            }
+            ThermalFile brokenThermalFile = DeclareBadThermalFile(thermalFiles[0]);
+            brokenThermalFile.path = @"D:\ThermalDetection\Theata\tem23.tof";
+            thermalFiles.Add(brokenThermalFile);
+
+            foreach (var thermal in thermalFiles)
+                if (thermal != thermalFiles[0])
+                    badComprared++;
+
+            // Assert
+            Assert.AreEqual(0, badComprared);
+        }
+        [TestMethod]
+        public void ComprareThermalFilesWithBrokenImage()
+        {
+            // Arrage
+            int quantity = 10;
+            int equalsCount = 0;
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
+            List<ThermalFile> thermalFiles = new List<ThermalFile>();
+            ThermalFile.thermalreader = new MockReader();
+            ThermalFile thermalFile = ThermalFile.Read(path);
+            // Act
+            for (int i = 0; i < quantity; i++)
+            {
+                thermalFiles.Add(thermalFile);
+            }
+            ThermalFile badFile = GenerateThermalFileWithBrokenImage(thermalFiles[0]);
+            thermalFiles.Add(badFile);
+
+            foreach (var thermal in thermalFiles)
+                if (thermal == thermalFiles[1])
+                    equalsCount++;
+            // Assert
+            Assert.AreEqual(quantity, equalsCount);
+        }
+
+
 
         [TestMethod]
         public void WriteFileTest()
@@ -169,16 +187,19 @@ namespace ThermalOperationsTests
             // Arrage
             List<ThermalFile> thermalFiles = new List<ThermalFile>();
             ThermalFile.thermalreader = new MockReader();
+
+            string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+            string path2 = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp225.tof";
+
             // Act
             ThermalFile file = ThermalFile.Read(path);
 
-            string path2 = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp225.tof";
             File.Delete(path2);
             ThermalFile.Write(path2, file);
             ThermalFile file2 = ThermalFile.Read(path2);
 
-            int excepted = 0;
-            if (file==file2)
+            int excepted = 1;
+            if (file == file2)
             {
                 excepted = 1;
             }

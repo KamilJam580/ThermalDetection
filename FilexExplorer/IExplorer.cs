@@ -10,7 +10,7 @@ namespace FilexExplorer
     public interface IExplorer
     {
         string gotoUpperDir();
-        string gotoDir(string dir);
+        void gotoDir(string dir);
         string CurrentPath
         {
             get;
@@ -19,5 +19,7 @@ namespace FilexExplorer
         List<string> getDirs();
         List<IFile> getThermoFiles();
         List<IFile> getFiles();
+        void CreateNewDir(string name);
+        void DeleteDir(string name);
     }
 }

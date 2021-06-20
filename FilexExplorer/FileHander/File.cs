@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace FilexExplorer
     public class File : IFile
     {
         private string path;
-        public string Path
+        public virtual string Path
         {
             get
             {
@@ -19,7 +20,11 @@ namespace FilexExplorer
             }
             set
             {
-                path = value;
+                Console.WriteLine(value);
+                if (System.IO.File.Exists(value))
+                    path = value;
+                else
+                    throw new Exception();
             }
         }
 

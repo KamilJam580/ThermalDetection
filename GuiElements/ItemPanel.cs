@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace GuiElements
 {
-    public class ItemPanel
+    public class ItemPanel 
     {
         Font font = new Font("Arial", 8, FontStyle.Regular);
         SolidBrush drawBrush = new SolidBrush(Color.Black);

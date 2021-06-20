@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using CoreLib.FileHander;
 using FilexExplorer;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,69 +10,131 @@ namespace ThermalOperationsTests
     [TestClass]
     public class FileExplorerTest
     {
-        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\";
+        public void MakeTempDirsFiles()
+        {
 
-        [TestMethod]
-        public void GetFilesInDir()
-        {
-            IExplorer fileExplorer = new MockExplorer();
-            fileExplorer.CurrentPath = path;
-            List<IFile> filesName = fileExplorer.getFiles();
-            Assert.AreEqual(10, filesName.Count);
-        }
-
-        [TestMethod]
-        public void GetThremoFilesInDir()
-        {
-            IExplorer fileExplorer = new MockExplorer();
-            fileExplorer.CurrentPath = path;
-            Console.WriteLine(fileExplorer.CurrentPath);
-            List<IFile> filesName = fileExplorer.getThermoFiles();
-            Assert.AreEqual(10, filesName.Count);
-        }
-        [TestMethod]
-        public void GetUpperDirectoryPath()
-        {
-            IExplorer fileExplorer = new MockExplorer();
-            string excepted = @"D:\ThermalDetection\ThermalDetection\ThermalData\";
-            fileExplorer.CurrentPath = path;
-            string upperDir = fileExplorer.gotoUpperDir();
-            Assert.AreEqual(excepted, upperDir);
-        }
-        [TestMethod]
-        public void CountDirsTest()
-        {
-            IExplorer fileExplorer = new MockExplorer();
-            fileExplorer.CurrentPath = path;
-            List<string> upperDir = fileExplorer.getDirs();
-            Console.WriteLine(upperDir.Count);
-            Assert.AreEqual(10, upperDir.Count);
-        }
-        [TestMethod]
-        public void CountDirsTest2()
-        {
-            IExplorer fileExplorer = new MockExplorer();
-            string path = @"D:\ThermalDetection\ThermalDetection\";
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\";
             fileExplorer.CurrentPath = path;
 
-            Assert.AreEqual(10, fileExplorer.getDirs().Count);
+            fileExplorer.CreateNewDir("xxx2");
+            fileExplorer.gotoDir("xxx2");
+
+            System.IO.File.WriteAllLines(fileExplorer.CurrentPath+@"\xx.tof", new string[0]);
+            System.IO.File.WriteAllLines(fileExplorer.CurrentPath + @"\xx2.tof", new string[0]);
+            System.IO.File.WriteAllLines(fileExplorer.CurrentPath + @"\xx3.tof", new string[0]);
+            System.IO.File.WriteAllLines(fileExplorer.CurrentPath + @"\xx3.xyz", new string[0]);
+
+
+
+            fileExplorer.CreateNewDir("yyy2");
+            fileExplorer.CreateNewDir("yyy3");
+            fileExplorer.CreateNewDir("yyy4");
+            fileExplorer.gotoDir("yyy2");
+
+            fileExplorer.CreateNewDir("zzz2");
+
+
+            fileExplorer.gotoUpperDir();
+            fileExplorer.gotoUpperDir();
+            fileExplorer.gotoUpperDir();
+
         }
-        [TestMethod]
-        public void CountDirsTest3()
+        public void DeleteTempDirsFiles()
         {
-            IExplorer fileExplorer = new MockExplorer();
-            fileExplorer.CurrentPath = @"D:\ThermalDetection\ThermalDetection\Tests\bin\Debug";
-        Assert.AreEqual(fileExplorer.CurrentPath, @"D:\ThermalDetection\ThermalDetection\Tests\bin\Debug");
+            string path = @"C:\";
+            IExplorer fileExplorer = new Explorer();
+            fileExplorer.CurrentPath = path;
+            fileExplorer.DeleteDir("xxx2");
         }
+
         [TestMethod]
-        public void CountDirsTest4()
+        public void CheckSettingDirs()
         {
-            IExplorer fileExplorer = new MockExplorer();
-            string path = @"D:\ThermalDetection\ThermalDetection";
+            MakeTempDirsFiles();
+
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\xxx2";
+            fileExplorer.CurrentPath = path;
+
+            Assert.AreEqual(@"C:\xxx2", fileExplorer.CurrentPath);
+            DeleteTempDirsFiles();
+        }
+
+        [TestMethod]
+        public void GoToEachDirTest()
+        {
+            MakeTempDirsFiles();
+
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\xxx2";
             fileExplorer.CurrentPath = path;
             List<string> dirs = fileExplorer.getDirs();
-            fileExplorer.CurrentPath = dirs[0];
-            Assert.AreEqual(dirs[0], fileExplorer.CurrentPath);
+            foreach (var dir in dirs)
+            {
+                fileExplorer.gotoDir(dir);
+                fileExplorer.gotoUpperDir();
+            }
+            DeleteTempDirsFiles();
         }
+        [TestMethod]
+        public void GoUpTooMuch()
+        {
+            MakeTempDirsFiles();
+
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\xxx2";
+            fileExplorer.CurrentPath = path;
+            fileExplorer.gotoUpperDir();
+            fileExplorer.gotoUpperDir();
+            fileExplorer.gotoUpperDir();
+            fileExplorer.gotoUpperDir();
+            Console.WriteLine(fileExplorer.CurrentPath);
+            DeleteTempDirsFiles();
+        }
+        [TestMethod]
+        public void CheckFilesQuantity()
+        {
+            MakeTempDirsFiles();
+
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\xxx2";
+            fileExplorer.CurrentPath = path;
+            List<IFile> files = fileExplorer.getFiles();
+            Assert.AreEqual(4, files.Count);
+
+            DeleteTempDirsFiles();
+        }
+
+        [TestMethod]
+        public void CheckFilesName()
+        {
+            MakeTempDirsFiles();
+
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\xxx2";
+            fileExplorer.CurrentPath = path;
+            List<IFile> files = fileExplorer.getFiles();
+            Assert.AreEqual("xx.tof", files[0].getName());
+
+            DeleteTempDirsFiles();
+        }
+
+        [TestMethod]
+        public void SearchTermoFilesTest()
+        {
+            MakeTempDirsFiles();
+
+            IExplorer fileExplorer = new Explorer();
+            string path = @"C:\xxx2";
+            fileExplorer.CurrentPath = path;
+            List<IFile> files = fileExplorer.getThermoFiles();
+            Assert.AreEqual(3, files.Count);
+
+            DeleteTempDirsFiles();
+        }
+
+
+
     }
 }

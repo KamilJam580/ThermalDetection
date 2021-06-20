@@ -14,26 +14,30 @@ using GuiElements;
 using FilexExplorer;
 using ThermalOperations;
 using CoreLib.FileHander;
+using Core.FileHander;
 
 namespace App
 {
     public partial class Form1 : Form
     {
         ThermalFile thermalFile;
-        string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+
 
         Explorer filexExplorer;
         StringFormat drawFormat = new StringFormat();
         ItemPanel guiElements = new ItemPanel();
+
+
         public Form1()
         {
             InitializeComponent();
-            loadThermalFile();
+            //string path = @"D:\ThermalDetection\ThermalDetection\ThermalData\temp223.tof";
+            //loadThermalFile(path);
 
             drawFormat.FormatFlags = StringFormatFlags.LineLimit;
 
             filexExplorer = new Explorer();
-            filexExplorer.CurrentPath = @"D:\Dysk USB\2017";
+            filexExplorer.CurrentPath = @"D:\ThermalDetection\ThermalDetection";
 
             guiElements.SetFolderClickDelegate(FolderItemClicked);
             guiElements.SetFileClickDelegate(FileItemClicked);
@@ -41,8 +45,9 @@ namespace App
             CreateUpperDirButton();
             DrawTable();
         }
-        private void loadThermalFile()
+        private void loadThermalFile(string path)
         {
+            Console.WriteLine("Load Thermal File: " + path);
             thermalFile = ThermalFile.Read(path);
             imageBox1.Image = thermalFile.images[0];
             trackBar1.Maximum = thermalFile.count-1;
@@ -92,6 +97,11 @@ namespace App
         }
         private void FileItemClicked(object sender, EventArgs e, IFile file)
         {
+            if (file.Path.EndsWith(".tof"))
+            {
+                loadThermalFile(file.Path);
+            }
+
             Console.WriteLine("event: " + file.getName());
         }
         private void ConfigureTablePanel()

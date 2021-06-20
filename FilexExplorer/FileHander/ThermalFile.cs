@@ -2,6 +2,7 @@
 using CoreLib.FileHander;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ThermalOperations
 {
-    public class ThermalFile : IFile
+    public class ThermalFile : FilexExplorer.File
     {
         public double minTemperature;
         public double maxTemperature;
@@ -23,6 +24,8 @@ namespace ThermalOperations
         public int width;
         public List<Emgu.CV.Matrix<int>> intMatrices;
         private List<int[,]> temperatureData;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public static ThermalFile Read(string filePath)
         {
@@ -43,31 +46,6 @@ namespace ThermalOperations
                 temperatureData = value;
                 intMatrices = DataConverting.ScaleIntensity(temperatureData, out minTemperature, out maxTemperature);
             }
-        }
-
-        public string Path
-        {
-            get
-            {
-                return path;
-            }
-            set
-            {
-                if (Directory.Exists(value))
-                    path = value;
-                else
-                    throw new Exception();
-            }
-        }
-
-        public Image getThumbnail()
-        {
-            Icon icon = Icon.ExtractAssociatedIcon(path);
-            return icon.ToBitmap();
-        }
-        public string getName()
-        {
-            return System.IO.Path.GetFileName(Path);
         }
 
         public static bool operator == (ThermalFile file1, ThermalFile file2)

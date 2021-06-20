@@ -82,6 +82,7 @@ namespace ThermalOperations
 
                     Parallel.For(0, intMatrices.Count, i =>
                     {
+                        Emgu.CV.CvInvoke.UseOpenCL = false;
                         Emgu.CV.UMat ColorImg = new Emgu.CV.UMat();
                         Emgu.CV.UMat UMatFloatImg;
                         Emgu.CV.UMat UMatFloatImg2 = new Emgu.CV.UMat();

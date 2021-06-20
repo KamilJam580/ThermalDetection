@@ -12,7 +12,6 @@ namespace FilexExplorer
     public class Explorer : IExplorer
     {
         private static string thermoExtension = "*.tof";
-        public List<string> dirs = new List<string>();
         public List<IFile> files = new List<IFile>();
         public List<IFile> thermofiles = new List<IFile>();
 
@@ -30,9 +29,6 @@ namespace FilexExplorer
                 if (Directory.Exists(value))
                 {
                     currentPath = value;
-                    files = searchFiles();
-                    thermofiles = searchThermoFiles();
-                    dirs = searchDirs();
                 }
                 else
                 {
@@ -40,75 +36,39 @@ namespace FilexExplorer
                 }
             }
         }
-
+        public void gotoDir(string dir)
+        {
+                string path = CurrentPath + (@"\" + dir);
+                CurrentPath = path;
+        }
 
         public string gotoUpperDir()
         {
-            if (Directory.Exists(CurrentPath))
+            string path = CurrentPath;
+            try
             {
-                string path = CurrentPath;
                 int index = path.LastIndexOf(@"\".ToCharArray()[0]);
-                path = CurrentPath.Substring(0, index);
+                string newpath = CurrentPath.Substring(0, index);
+                if (Directory.Exists(newpath))
+                {
+                    if (newpath.EndsWith(":"))
+                    {
+                        newpath+=@"\";
+                    }
+                    CurrentPath = newpath;
+                }
+                return CurrentPath;
+            }
+            catch (Exception)
+            {
+
                 CurrentPath = path;
                 return CurrentPath;
             }
-            else
-            {
-                throw new Exception();
-            }
+
         }
 
-        public string gotoDir(string dir)
-        {
-            if (dirs.Contains(dir))
-            {
-                CurrentPath += (@"\" + dir);
-                return CurrentPath;
-            }
-            else
-                throw new Exception();
-        }
-
-        private List<IFile> searchFiles()
-        {
-            if (Directory.Exists(currentPath))
-            {
-                string[] filesNames = Directory.GetFiles(currentPath);
-
-                files = new List<IFile>();
-                foreach (var fileName in filesNames)
-                {
-                    IFile file = new File();
-                    file.Path = fileName;
-                    files.Add(file);
-                }
-                return files;
-            }
-            else
-            {
-                throw new Exception();
-            }
-        }
-        private List<IFile> searchThermoFiles()
-        {
-            if (Directory.Exists(currentPath))
-            {
-                string[] fileslist = Directory.GetFiles(currentPath, thermoExtension);
-                foreach (var filename in fileslist)
-                {
-                    IFile file = new ThermalFile();
-                    file.Path = filename;
-                    thermofiles.Add(file);
-                }
-
-                return thermofiles;
-            }
-            else
-            {
-                throw new Exception();
-            }
-        }
-        private List<string> searchDirs()
+        public List<string> getDirs()
         {
             string[] dirs2 = Directory.GetDirectories(currentPath);
 
@@ -120,20 +80,44 @@ namespace FilexExplorer
             }
             return FolderNames;
         }
-
-        public List<string> getDirs()
+        public void CreateNewDir(string name)
         {
-            return dirs;
+            string path = CurrentPath + (@"\" + name);
+            Directory.CreateDirectory(path);
         }
 
-        public List<IFile> getThermoFiles()
+        public void DeleteDir(string name)
         {
-            return thermofiles;
+            string path = CurrentPath + (@"\" + name);
+            Directory.Delete(path, true);
         }
 
         public List<IFile> getFiles()
         {
+            string[] filesNames = Directory.GetFiles(currentPath);
+            files = new List<IFile>();
+            foreach (var fileName in filesNames)
+            {
+                IFile file = new File();
+                file.Path = fileName;
+                files.Add(file);
+            }
             return files;
         }
+
+
+        public List<IFile> getThermoFiles()
+        {
+            string[] fileslist = Directory.GetFiles(currentPath, thermoExtension);
+            foreach (var filename in fileslist)
+            {
+                IFile file = new ThermalFile();
+                file.Path = filename;
+                thermofiles.Add(file);
+            }
+            return thermofiles;
+        }
+
+
     }
 }

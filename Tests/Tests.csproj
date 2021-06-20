@@ -75,10 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FileHandlerTest.cs" />
-    <Compile Include="MockExplorer.cs" />
-    <Compile Include="MockReader.cs" />
+    <Compile Include="Mocks\MockExplorer.cs" />
+    <Compile Include="Mocks\MockReader.cs" />
+    <Compile Include="Mocks\MockFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FileExplorerTest.cs" />
+    <Compile Include="IFileTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
